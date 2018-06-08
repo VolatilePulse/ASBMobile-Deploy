@@ -1,0 +1,11 @@
+{
+  "name": "asbm-deploy",
+  "private": true,
+  "scripts": {
+    "import-data": "node scripts/import-data.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "firebase-admin": "^5.12.1"
+  }
+}

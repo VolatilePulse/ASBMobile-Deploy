@@ -1,0 +1,86 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /user/{user_id} {
+      allow create: if authenticatedUser() == user_id;
+      allow update: if authenticatedUser() == user_id;
+      allow delete: if authenticatedUser() == user_id;
+      allow get:    if authenticatedUser() == user_id;
+    }
+
+    match /library/{library_id} {
+      allow create: if isNewOwner();
+      allow delete: if isOwner();
+      allow update: if isOwner();
+      allow update: if isAdmin() && doesNotContainFields(['owner','admins']); // admins cannot write to owner or admin fields
+      allow get: if isOwner() || isAdmin() || isMember();
+
+      // For library access
+
+      function isNewOwner() {
+        return incomingField('owner') == authenticatedUser();
+      }
+
+      function isOwner() {
+        return existingField('owner') == authenticatedUser();
+      }
+
+      function isAdmin() {
+        return authenticatedUser() in existingField('admins');
+      }
+
+      function isMember() {
+        return authenticatedUser() in existingField('members');
+      }
+
+      // For access to subcollections of the library
+
+      function isLibraryOwner() {
+        return getLibrary()['owner'] == authenticatedUser();
+      }
+
+      function isLibraryAdmin() {
+        return authenticatedUser() in getLibrary()['admins'];
+      }
+
+      function isLibraryMember() {
+        return authenticatedUser() in getLibrary()['members'];
+      }
+
+      function getLibrary() {
+        return get(/databases/$(database)/documents/library/$(library_id)).data;
+      }
+
+      match /server/{server_id} {
+        allow create: if isLibraryOwner() || isLibraryAdmin();
+        allow update: if isLibraryOwner() || isLibraryAdmin();
+        allow delete: if isLibraryOwner() || isLibraryAdmin();
+        allow get: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+        allow list: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+      }
+
+      match /creature/{creature_id} {
+        allow create: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+        allow update: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+        allow delete: if isLibraryOwner() || isLibraryAdmin();
+        allow get: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+        allow list: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+      }
+    }
+
+    function authenticatedUser() {
+      return request.auth.uid;
+    }
+
+    function existingField(name) {
+      return resource.data[name];
+    }
+
+    function incomingField(name) {
+      return request.resource.data[name];
+    }
+
+    function doesNotContainFields(fields) {
+      return !request.writeFields.hasAny(fields);
+    }
+  }
+}
