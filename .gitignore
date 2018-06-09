@@ -1,3 +1,4 @@
 pwa
 private
 node_modules
+*.stackdump

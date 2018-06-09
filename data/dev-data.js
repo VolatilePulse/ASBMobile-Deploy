@@ -19,12 +19,15 @@ module.exports = {
     },
     "library": {
         "private1": {
+            name: 'Private 1',
             owner: 'RQ9Zeb6ltiReWCZJukS0Y3iTIOK2',
         },
         "private2": {
+            name: 'Private 2',
             owner: 'EFQTGTQTYvYOMcC1UBxpccihBT63',
         },
         "as_admins": {
+            name: 'Admins',
             owner: 'fred',
             admins: {
                 'RQ9Zeb6ltiReWCZJukS0Y3iTIOK2': true,
@@ -32,6 +35,7 @@ module.exports = {
             }
         },
         "as_members": {
+            name: 'Members',
             owner: 'fred',
             members: {
                 'RQ9Zeb6ltiReWCZJukS0Y3iTIOK2': true,
@@ -39,6 +43,7 @@ module.exports = {
             }
         },
         "as_pending": {
+            name: 'Pending',
             owner: 'fred',
             pending: {
                 'RQ9Zeb6ltiReWCZJukS0Y3iTIOK2': true,
@@ -46,6 +51,7 @@ module.exports = {
             }
         },
         "inaccessible": {
+            name: 'Inaccessible',
             owner: "fred",
         }
     },
