@@ -5,6 +5,8 @@ service cloud.firestore {
       allow update: if authenticatedUser() == user_id;
       allow delete: if authenticatedUser() == user_id;
       allow get:    if authenticatedUser() == user_id;
+
+      allow list: if true; // TODO: Remove me! Convenience for early dev.
     }
 
     match /library/{library_id} {
@@ -12,7 +14,9 @@ service cloud.firestore {
       allow delete: if isOwner();
       allow update: if isOwner();
       allow update: if isAdmin() && doesNotContainFields(['owner','admins']); // admins cannot write to owner or admin fields
-      allow get: if isOwner() || isAdmin() || isMember();
+      allow get: if isOwner() || isAdmin() || isMember() || isPublic();
+
+      allow list: if true; // TODO: Remove me! Convenience for early dev.
 
       // For library access
 
@@ -32,6 +36,10 @@ service cloud.firestore {
         return authenticatedUser() in existingField('members');
       }
 
+      function isPublic() {
+        return existingField('public') == true;
+      }
+
       // For access to subcollections of the library
 
       function isLibraryOwner() {
@@ -46,6 +54,10 @@ service cloud.firestore {
         return authenticatedUser() in getLibrary()['members'];
       }
 
+      function isLibraryPublic() {
+        return getLibrary()['public'] == true;
+      }
+
       function getLibrary() {
         return get(/databases/$(database)/documents/library/$(library_id)).data;
       }
@@ -54,16 +66,16 @@ service cloud.firestore {
         allow create: if isLibraryOwner() || isLibraryAdmin();
         allow update: if isLibraryOwner() || isLibraryAdmin();
         allow delete: if isLibraryOwner() || isLibraryAdmin();
-        allow get: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
-        allow list: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+        allow get: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember() || isLibraryPublic();
+        allow list: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember() || isLibraryPublic();
       }
 
       match /creature/{creature_id} {
         allow create: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
         allow update: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
         allow delete: if isLibraryOwner() || isLibraryAdmin();
-        allow get: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
-        allow list: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember();
+        allow get: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember() || isLibraryPublic();
+        allow list: if isLibraryOwner() || isLibraryAdmin() || isLibraryMember() || isLibraryPublic();
       }
     }
 
