@@ -1,5 +1,9 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    match /dev/{subpath=**} {
+      allow read: if true;
+    }
+
     match /user/{user_id} {
       allow create: if authenticatedUser() == user_id;
       allow update: if authenticatedUser() == user_id;

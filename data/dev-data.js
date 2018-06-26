@@ -183,7 +183,7 @@ module.exports = {
          '76Z543ertGHyt4J0ui': {
             tag: 'Massive filter strain',
             creature: {
-               species: 'Giganotosaurus', level: 3521, imprintingBonus: 0, isTamed: true,
+               species: 'Giganotosaurus', level: 3521, imprintingBonus: 0, isTamed: true, inputSource: 'asbm_user_input',
                statValues: [38555.6, 597.8, 460.2, 13198.5, 5079.6, 2798.3, 106.5, 2042200.0],
                currentServer: 'Official Server',
             },
@@ -194,12 +194,13 @@ module.exports = {
          'fNhjDGH476h9ji235': {
             tag: 'Simplest possible Rex',
             creature: {
-               species: 'Rex', level: 1, imprintingBonus: 0, isTamed: true,
+               species: 'Rex', level: 1, imprintingBonus: 0, isTamed: true, inputSource: 'asbm_user_input',
                statValues: [1100.1, 420, 150, 3000, 500, 125.8, 100, 1550.5],
                currentServer: 'Official Server',
             },
             criteria: [
                { test: 'has_option', levelsDom: [0, 0, 0, 0, 0, 0, 0, 0], levelsWild: [0, 0, 0, 0, 0, 0, 0, 0], },
+               { test: 'has_option_count', count: 1 },
             ],
          },
       },
