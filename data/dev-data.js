@@ -71,8 +71,8 @@ module.exports = {
          'tk0Q61cVVJlZez8bjXia': {
             name: 'Coldino SP',
             singlePlayer: true,
-            multipliers: { 0: {}, 1: { 0: 2, 2: 2 }, 2: {}, 3: {}, 4: { 0: 10, 2: 10 }, 5: { 0: 0.2, 2: 0.22 }, 6: { 0: 3, 2: 3 } },
-            ibm: 1,
+            multipliers: { 0: {}, 1: { 0: 2, 2: 2 }, 2: {}, 3: {}, 4: { 0: 10, 2: 10 }, 5: { 0: 0.2, 2: 0.22 }, 6: { 0: 3, 2: 3 }, 7: {} },
+            IBM: 1,
          }
       },
       "library/as_admins/creature": {
@@ -159,23 +159,23 @@ module.exports = {
       'dev/testing/server': {
          'Official Server': {
             singlePlayer: false,
-            multipliers: { 0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
-            ibm: 1,
+            multipliers: { 0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {} },
+            IBM: 1,
          },
          'Official Server SP': {
             singlePlayer: true,
-            multipliers: { 0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} },
-            ibm: 1,
+            multipliers: { 0: {}, 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {} },
+            IBM: 1,
          },
          'Coldino SP': {
             singlePlayer: true,
-            multipliers: { 0: {}, 1: { 0: 2, 2: 2 }, 2: {}, 3: {}, 4: { 0: 10, 2: 10 }, 5: { 0: 0.2, 2: 0.22 }, 6: { 0: 3, 2: 3 } },
-            ibm: 1,
+            multipliers: { 0: {}, 1: { 0: 2, 2: 2 }, 2: {}, 3: {}, 4: { 0: 10, 2: 10 }, 5: { 0: 0.2, 2: 0.22 }, 6: { 0: 3, 2: 3 }, 7: {} },
+            IBM: 1,
          },
          'ARK PVE Community Server': {
-            IBM: 1,
             singlePlayer: false,
-            multipliers: { 0: {}, 1: {}, 2: {}, 3: {}, 4: { 2: 1.5, 3: 3 }, 5: {}, 6: { 0: 2 } },
+            multipliers: { 0: {}, 1: {}, 2: {}, 3: {}, 4: { 2: 1.5, 3: 3 }, 5: {}, 6: { 0: 2 }, 7: {} },
+            IBM: 1,
          },
       },
 
@@ -184,7 +184,7 @@ module.exports = {
             tag: 'Massive filter strain',
             creature: {
                species: 'Giganotosaurus', level: 3521, imprintingBonus: 0, isTamed: true, inputSource: 'asbm_user_input',
-               statValues: [38555.6, 597.8, 460.2, 13198.5, 5079.6, 2798.3, 106.5, 2042200.0],
+               values: [38555.6, 597.8, 460.2, 13198.5, 5079.6, 2798.3, 106.5, 2042200.0],
                currentServer: 'Official Server',
             },
             criteria: [
@@ -195,7 +195,7 @@ module.exports = {
             tag: 'Simplest possible Rex',
             creature: {
                species: 'Rex', level: 1, imprintingBonus: 0, isTamed: true, inputSource: 'asbm_user_input',
-               statValues: [1100.1, 420, 150, 3000, 500, 125.8, 100, 1550.5],
+               values: [1100.1, 420, 150, 3000, 500, 125.8, 100, 1550.5],
                currentServer: 'Official Server',
             },
             criteria: [
