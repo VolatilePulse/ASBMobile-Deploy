@@ -2,10 +2,17 @@
   "name": "asbm-deploy",
   "private": true,
   "scripts": {
-    "import-data": "node scripts/import-data.js"
+    "import-data": "node scripts/import-data.js",
+    "build": "npm-run-all -s build-pwa script-split-index build-functions",
+    "build-pwa": "cd pwa && npm build",
+    "build-functions": "cd functions && npm run build",
+    "script-split-index": "node scripts/split-index.js"
   },
   "license": "MIT",
   "devDependencies": {
-    "firebase-admin": "^5.12.1"
+    "cross-env": "^5.2.0",
+    "firebase-admin": "^5.12.1",
+    "npm-run-all": "^4.1.3",
+    "serialize-javascript": "^1.5.0"
   }
 }

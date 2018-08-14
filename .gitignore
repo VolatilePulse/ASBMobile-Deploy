@@ -2,3 +2,4 @@ pwa
 private
 node_modules
 *.stackdump
+functions/lib/

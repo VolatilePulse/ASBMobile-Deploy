@@ -10,7 +10,7 @@ service cloud.firestore {
       allow delete: if authenticatedUser() == user_id;
       allow get:    if authenticatedUser() == user_id;
 
-      allow list: if true; // TODO: Remove me! Convenience for early dev.
+      // allow list: if true; // TODO: Remove me! Convenience for early dev.
     }
 
     match /library/{library_id} {

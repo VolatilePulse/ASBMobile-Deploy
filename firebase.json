@@ -13,11 +13,36 @@
     ],
     "rewrites": [
       {
+        "source": "/dbg/**",
+        "function": "dbg"
+      },
+      {
+        "source": "/invite/**",
+        "function": "invite"
+      },
+      {
+        "source": "/showcase/**",
+        "function": "showcase"
+      },
+      {
+        "source": "/api/oembed",
+        "function": "oembed"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
     ],
     "headers": [
+      {
+        "source": "/",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=600"
+          }
+        ]
+      },
       {
         "source": "/service-worker.js",
         "headers": [
@@ -81,6 +106,13 @@
           }
         ]
       }
+    ]
+  },
+  "functions": {
+    "predeploy": [
+      "node scripts/split-index.js",
+      "npm --prefix functions run lint",
+      "npm --prefix functions run build"
     ]
   }
 }
