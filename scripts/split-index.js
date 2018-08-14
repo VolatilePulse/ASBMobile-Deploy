@@ -10,8 +10,8 @@ const OUTPUT_SCRIPT = 'functions/src/template.ts';
 
 const originaData = fs.readFileSync(INDEX_FILENAME).toString();
 
-const parts = originaData.split(/<replace-meta-(?:start|end)><\/replace-meta-(?:start|end)>/);
-// console.log(inspect(parts));
+const parts = originaData.split(/<meta name=replace-meta-(?:start|end)>/);
+console.log(inspect(parts));
 if (parts.length !== 3) {
     console.error("Input file has invalid placeholders");
     process.exit(1);
